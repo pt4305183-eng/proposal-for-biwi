@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Biwi Ji 💗</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffd6e8, #fff1f6);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+    .card {
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      border-radius: 24px;
+      padding: 32px 28px 36px;
+      width: min(92vw, 520px);
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
+      position: relative;
+    }
+    h1.question {
+      font-size: 1.35rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: #5a2a3a;
+    }
+    .buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 16px;
+      position: relative;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,.15);
+    }
+    button:active { transform: scale(0.97); }
+    .yes {
+      background: #ff4fa3;
+      color: #fff;
+    }
+    .no {
+      background: #e5e7eb;
+      color: #374151;
+      position: absolute; /* so it can move */
+      right: 0;
+    }
+
+    /* Result screen */
+    .result {
+      display: none;
+      animation: fadeIn .5s ease forwards;
+    }
+    .result h2 {
+      font-family: 'Pacifico', cursive;
+      color: #ff2f92;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .result h3 {
+      color: #ff6fb5;
+      font-size: 1.4rem;
+      margin: 10px 0 18px;
+      font-weight: 600;
+    }
+    .message {
+      color: #5a2a3a;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .sparkles {
+      margin-top: 14px;
+      font-size: 1.3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 18px;
+      animation: floatUp 6s linear infinite;
+      opacity: .8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: .8; }
+      100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div id="questionScreen">
+      <h1 class="question">
+        I know you are already mine, but even then I have a huge crush on you soooo…<br/><br/>
+        Can I have you for my entire life?
+      </h1>
+      <div class="buttons" id="btnWrap">
+        <button class="yes" id="yesBtn">Yes 💗</button>
+        <button class="no" id="noBtn">No 😞</button>
+      </div>
+    </div>
+
+    <div class="result" id="resultScreen">
+      <h2>I knew it</h2>
+      <h3>Happy Proposal Day my Biwi Ji</h3>
+      <p class="message">
+        I want to spend my today, tomorrow, my entire life with you.
+        I wanna grow old with you.<br/><br/>
+        <strong>I love u my biwi jii 💗🧿✨</strong>
+      </p>
+      <div class="sparkles">💖✨💗</div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const btnWrap = document.getElementById('btnWrap');
+    const questionScreen = document.getElementById('questionScreen');
+    const resultScreen = document.getElementById('resultScreen');
+
+    function moveNo() {
+      const wrapRect = btnWrap.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+      const maxX = wrapRect.width - btnRect.width;
+      const maxY = 60; // keep near buttons
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    noBtn.addEventListener('mouseenter', moveNo);
+    noBtn.addEventListener('click', moveNo);
+
+    yesBtn.addEventListener('click', () => {
+      questionScreen.style.display = 'none';
+      resultScreen.style.display = 'block';
+      launchHearts();
+    });
+
+    function launchHearts() {
+      for (let i = 0; i < 24; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.textContent = '💗';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDelay = Math.random() * 3 + 's';
+        h.style.fontSize = 14 + Math.random() * 20 + 'px';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
+      }
+    }
+  </script>
+</body>
+</html>
